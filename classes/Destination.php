@@ -1,0 +1,63 @@
+<?php
+class Destination {
+    private int $id;
+    private string $location;
+    private int $price;
+    
+
+    /**
+     * Get the value of id
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set the value of id
+     */
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of location
+     */
+    public function getLocation(): string
+    {
+        return $this->location;
+    }
+
+    /**
+     * Set the value of location
+     */
+    public function setLocation(string $location): self
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of price
+     */
+    public function getPrice(): int
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set the value of price
+     */
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+}
+
+?>
