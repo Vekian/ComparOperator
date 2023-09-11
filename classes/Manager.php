@@ -42,6 +42,7 @@
         public function displayDestination($data){
             foreach($data as $destination){
                 echo('<div class="card" style="width: 18rem;">
+                        <img src="'. $destination->getPicture() .'" class="card-img-top" alt="'. $destination->getLocation() .'" height="200px">
                         <div class="card-body">
                         <h5 class="card-title">Nom : '. $destination->getLocation() .'</h5>
                         <p class="card-text">Prix : '. $destination->getPrice() .'</p>
