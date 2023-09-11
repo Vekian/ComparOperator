@@ -3,6 +3,7 @@ class Destination {
     private int $id;
     private string $location;
     private int $price;
+    private string $picture;
     
 
     /**
@@ -59,6 +60,24 @@ class Destination {
         return $this;
     }
 
+    /**
+     * Get the value of picture
+     */
+    public function getPicture(): string
+    {
+        return $this->picture;
+    }
+
+    /**
+     * Set the value of picture
+     */
+    public function setPicture(string $picture): self
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
     public function __construct(array $data) {
         $this->hydrate($data);
     }
@@ -67,6 +86,7 @@ class Destination {
         $this->setId($data['id']);
         $this->setLocation($data['location']);
         $this->setPrice($data['price']);
+        $this->setPicture($data['picture']);
     }
 }
 
