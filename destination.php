@@ -4,13 +4,9 @@
     if (isset($_GET['name'])){
         $name = $_GET['name'];
         $operators = $manager->getOperatorByDestination($name);
+        foreach($operators as $operator){
+            $destination = $manager->getDestinationByOperator($operator, $name);
+            $manager->displayTourOperator($operator, $destination);
+        }
     }
 ?>
-<div class="d-flex justify-content-center">
-    <img src="images/londres.jpg" height="300px" >
-    <div class="d-flex flex-column align-items-center">
-        <h2>
-            Londres
-        </h2>
-    </div>
-</div>

@@ -2,7 +2,7 @@
 class Review {
     private int $id;
     private string $message;
-    private int $author;
+    private string $author;
     
 
     /**
@@ -44,7 +44,7 @@ class Review {
     /**
      * Get the value of author
      */
-    public function getAuthor(): int
+    public function getAuthor(): string
     {
         return $this->author;
     }
@@ -52,7 +52,7 @@ class Review {
     /**
      * Set the value of author
      */
-    public function setAuthor(int $author): self
+    public function setAuthor(string $author): self
     {
         $this->author = $author;
 
@@ -66,7 +66,7 @@ class Review {
     public function hydrate($data){
         $this->setId($data['id']);
         $this->setMessage($data['message']);
-        $this->setAuthor($data['id']);
+        $this->setAuthor($data['name']);
     }
 }
 

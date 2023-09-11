@@ -147,6 +147,17 @@ class TourOperator {
         $this->setReviews($reviews);
         $this->setScores($scores);
     }
+
+    public function getAverageScore(){
+        $answer = 0;
+        foreach($this->scores as $score) {
+            $answer += $score->getValue();
+        }
+        if(count($this->scores) > 0) {
+            return $answer/count($this->scores);
+        }
+        else return ('Aucune note');
+    }
 }
 
 

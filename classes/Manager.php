@@ -49,6 +49,7 @@
 
         public function getAllReviews($id){
             $query = $this->bdd->query('SELECT * FROM review
+                                        JOIN author ON review.author_id = author.id
                                         WHERE tour_operator_id = "'. $id .'"');
             $reviewsData = $query->fetchAll(PDO :: FETCH_ASSOC);
             $array = [];
@@ -75,7 +76,7 @@
         public function getOperatorByDestination($name) {
             $query = $this->bdd->query('SELECT * FROM destination 
                                         JOIN tour_operator ON destination.tour_operator_id = tour_operator.id
-            WHERE destination.location="'. $name .'"');
+            WHERE destination.location="'. $name .'" ORDER BY price ASC');
             $operatorsData = $query->fetchAll(PDO :: FETCH_ASSOC);
             $operators = [];
             foreach($operatorsData as $operatorData) {
@@ -89,17 +90,80 @@
             return $operators;
         }
 
+        public function getDestinationByOperator($operator, $name){
+            $destinations = $operator->getDestinations();
+            foreach($destinations as $destination) {
+                if ($destination->getLocation() === $name) {
+                    return $destination;
+                }
+            }
+        }
+
+        public function getLowerPrice($destinations, $name){
+            $price = 0;
+            foreach($destinations as $destination) {
+                if (($price === 0 && $name === $destination->getLocation()) || ($destination->getPrice() < $price && $name === $destination->getLocation())) {
+                    $price = $destination->getPrice();
+                }
+            }
+            return $price;
+        }
+
         public function displayDestination($data){
             foreach($data as $destination){
+                $price = $this->getLowerPrice($data, $destination->getLocation());
                 echo('<div class="card" style="width: 18rem;">
                         <img src="'. $destination->getPicture() .'" class="card-img-top" alt="'. $destination->getLocation() .'" height="200px">
                         <div class="card-body">
                         <h5 class="card-title">Nom : '. $destination->getLocation() .'</h5>
-                        <p class="card-text">À partir de '. $destination->getPrice() .' euros</p>
+                        <p class="card-text">À partir de '. $price .' euros</p>
                         <a href="destination.php?name='. $destination->getLocation() .'" class="btn btn-primary">En savoir plus </a>
                         </div>
                     </div>');
             }
+        }
+
+        public function displayTourOperator($operator, $destination){
+            echo('<div class="d-flex justify-content-center flex-wrap">
+                    <img src="'. $destination->getPicture() .'" height="300px" class="col-3">
+                    <div class="col-3 d-flex flex-column align-items-center border text-center">
+                        <h2 class="bg-light col-12">
+                            '. $operator->getName() .'
+                        </h2>
+                        <p>
+                            Destination: '. $destination->getLocation() .'
+                        </p>
+                        <p>
+                            Prix: '. $destination->getPrice() .'
+                        </p>
+                        <p>
+                            Avis moyen du TO : '. $operator->getAverageScore() .'
+                        </p>
+                        <button class="btn btn-primary">
+                            Ecrire un avis
+                        </button>
+                    </div>
+                    <div class="col-3 border text-center">
+                        <h4 class="bg-light">
+                            Avis
+                        </h4>
+                        
+                        '. $this->displayReviews($this->getAllReviews($operator->getId())) .'
+                    </div>
+                </div>');
+        }
+
+        public function displayReviews($reviews) {
+            $answer = '';
+            foreach ($reviews as $review) {
+            $answer .= '<div class="border m-3">
+                    '. $review->getMessage() .'
+            </div>
+            <div>Par 
+                '. $review->getAuthor() .'
+            </div>';
+            }
+            return $answer;
         }
     }
 
