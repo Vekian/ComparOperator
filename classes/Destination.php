@@ -58,6 +58,16 @@ class Destination {
 
         return $this;
     }
+
+    public function __construct(array $data) {
+        $this->hydrate($data);
+    }
+
+    public function hydrate(array $data) {
+        $this->setId($data['id']);
+        $this->setLocation($data['location']);
+        $this->setPrice($data['price']);
+    }
 }
 
 ?>
