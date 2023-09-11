@@ -58,6 +58,10 @@
 
                 return $this;
         }
+
+        public function __construct($data) {
+                
+        }
     }
 
 

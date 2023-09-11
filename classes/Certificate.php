@@ -1,25 +1,8 @@
 <?php
     class Certificate {
-        private $certificateAt;
+        private $expiresAt;
         private $signatory;
 
-        /**
-         * Get the value of certificateAt
-         */
-        public function getCertificateAt()
-        {
-                return $this->certificateAt;
-        }
-
-        /**
-         * Set the value of certificateAt
-         */
-        public function setCertificateAt($certificateAt): self
-        {
-                $this->certificateAt = $certificateAt;
-
-                return $this;
-        }
 
         /**
          * Get the value of signatory
@@ -35,6 +18,24 @@
         public function setSignatory($signatory): self
         {
                 $this->signatory = $signatory;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of expiresAt
+         */
+        public function getExpiresAt()
+        {
+                return $this->expiresAt;
+        }
+
+        /**
+         * Set the value of expiresAt
+         */
+        public function setExpiresAt($expiresAt): self
+        {
+                $this->expiresAt = $expiresAt;
 
                 return $this;
         }
