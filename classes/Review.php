@@ -58,6 +58,16 @@ class Review {
 
         return $this;
     }
+
+    public function __construct($data){
+        $this->hydrate($data);
+    }
+
+    public function hydrate($data){
+        $this->setId($data['id']);
+        $this->setMessage($data['message']);
+        $this->setAuthor($data['id']);
+    }
 }
 
 ?>

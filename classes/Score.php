@@ -60,7 +60,13 @@
         }
 
         public function __construct($data) {
-                
+                $this->hydrate($data);
+        }
+
+        public function hydrate($data) {
+                $this->setId($data['id']);
+                $this->setValue($data['value']);
+                $this->setAuthor($data['name']);
         }
     }
 
