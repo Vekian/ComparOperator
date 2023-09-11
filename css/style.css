@@ -1,3 +1,37 @@
 /*
 main : #FB8F00
 */
+/* Styles pour le footer */
+footer {
+    background-color: #000;
+    color: #fff;
+    padding-top: 20px;
+    position: absolute;
+    margin-top: auto;
+    bottom: 0;
+    width: 100%;
+}
+
+.container-icone {
+    text-align: center;
+    margin-top: 30px; /* Espacement entre le texte de droits d'auteur et les icônes */
+}
+
+.container-icone i {
+    font-size: 24px; /* Taille des icônes */
+    margin: 0 10px; /* Espacement horizontal entre les icônes */
+    bottom: 20px;
+}
+
+/* Styles pour le texte de droits d'auteur au bas du footer */
+footer p {
+    position: absolute;
+    bottom: 1px; /* Espacement par rapport au bas du footer */
+    width: 100%;
+}
+
+.container-icone p {
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px; /* Espacement entre le texte et les icônes */
+}
