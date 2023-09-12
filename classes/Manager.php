@@ -101,6 +101,12 @@
             return $price;
         }
 
+        public function getIdOfUser($name){
+            $query = $this->bdd->query('SELECT * FROM author WHERE name = "' . $name . '"');
+            $user = $query->fetch(PDO :: FETCH_ASSOC);
+            return $user['id'];
+        }
+
         public function filterDoubleDestination($array) {
             $checked = false;
             $arrayAnswer = [];
@@ -116,6 +122,60 @@
                 $checked = false;
             }
             return $arrayAnswer;
+        }
+
+        public function checkUser($name) {
+            $query = $this->bdd->query('SELECT * FROM author');
+            $usersData = $query->fetchAll(PDO :: FETCH_ASSOC);
+            foreach($usersData as $user){
+                if ($user['name'] === $name) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public function addMessage($message, $tourOperatorId, $author_id){
+            $query = $this->bdd->prepare('INSERT INTO review (message, tour_operator_id, author_id) VALUES (:message, :tour_operator_id, :author_id)');
+            $query->bindValue(':message', $message);
+            $query->bindValue(':tour_operator_id', $tourOperatorId);
+            $query->bindValue(':author_id', $author_id);
+            $query->execute();
+        }
+
+        public function addUser($name){
+            $q = $this->bdd->prepare('INSERT INTO author (name) VALUES (:name)');
+            $q->bindValue(':name', $name);
+            $q->execute();
+
+            return intval($this->bdd->lastInsertId());
+        }
+
+        public function addReview($name, $tourOperatorId, $message){
+            $answered = false;
+            if (!($this->checkUser($name))){
+                $id = $this->addUser($name);
+            }
+            else {
+                $query = $this->bdd->query('SELECT * FROM author 
+                                    JOIN review ON author.id = review.author_id
+                                    WHERE name = "'. $name . '"');
+                $reviews = $query->fetchAll(PDO :: FETCH_ASSOC);
+                if (count($reviews) > 0) {
+                    $id = $reviews[0]['author_id'];
+                }
+                else {
+                    $id = $this->getIdOfUser($name);
+                }
+                foreach($reviews as $review){
+                    if($review['tour_operator_id'] == $tourOperatorId) {
+                        $answered = true;
+                    }
+                }
+            };
+            if ($answered === false) {
+                $this->addMessage($message, $tourOperatorId, $id);
+            }
         }
 
         public function displayDestination($data){
@@ -135,7 +195,6 @@
 
         public function displayTourOperator($operator, $destination){
             echo('<div class="d-flex justify-content-center flex-wrap">
-                    <img src="'. $destination->getPicture() .'" height="300px" class="col-3">
                     <div class="col-3 d-flex flex-column align-items-center border text-center">
                         <h2 class="bg-light col-12">
                             '. $operator->getName() .'
@@ -149,8 +208,8 @@
                         <p>
                             Avis moyen du TO : '. $operator->getAverageScore() .'
                         </p>
-                        <button class="btn btn-primary">
-                            Ecrire un avis
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal'. $operator->getId() .'">
+                            Ajouter un avis
                         </button>
                     </div>
                     <div class="col-3 border text-center">
@@ -160,7 +219,33 @@
                         
                         '. $this->displayReviews($this->getAllReviews($operator->getId())) .'
                     </div>
-                </div>');
+                </div>
+
+              <div class="modal fade" id="exampleModal'. $operator->getId() .'" tabindex="-1" aria-labelledby="exampleModalLabel'. $operator->getId() .'" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel'. $operator->getId() .'">Ajouter un avis sur '. $operator->getName() .'</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="process/add-review.php" method="POST">
+                            <label for="pseudo">Votre pseudo</label>
+                            <input type="text" name="pseudo" id="pseudo" />
+                            <label for="message">Tapez votre message ici</label>
+                            <input type="text" name="message" id="message" />
+                            <input type="hidden" name="nameDestination" value="'. $destination->getLocation() .'" />
+                            <input type="hidden" name="tourOperatorId" value="'. $operator->getId() .'"/>
+                            <input type="submit" value="Envoyer" />
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>');
         }
 
         public function displayReviews($reviews) {
