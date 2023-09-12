@@ -75,7 +75,7 @@ if (isset($_POST['add_destination'])) {
         <br>
         <label for="tour_operator_id">Sélectionnez un Tour-Opérateur:</label>
         <select name="tour_operator_id" required>
-            <!-- Remplissez cette liste déroulante avec les noms des Tour-Opérateurs depuis la base de données -->
+            <!-- liste déroulante avec les noms des Tour-Opérateurs depuis la base de données -->
             <option value="1">Salaun Holidays</option>
             <option value="2">Fram</option>
             <!-- Ajoutez les autres options ici -->
