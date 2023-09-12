@@ -33,16 +33,8 @@
             $locationsData = $query->fetchAll(PDO :: FETCH_ASSOC);
             $array = [];
             foreach($locationsData as $locationData) {
-                $checked = false;
-                foreach($array as $object){
-                    if ($object->getLocation() === $locationData['location']) {
-                        $checked = true;
-                    }
-                }
-                if ($checked === false){
-                    $destination = new Destination ($locationData);
-                    array_push($array, $destination);
-                }
+                $destination = new Destination ($locationData);
+                array_push($array, $destination);
             }
             return $array;
         }
@@ -109,8 +101,26 @@
             return $price;
         }
 
+        public function filterDoubleDestination($array) {
+            $checked = false;
+            $arrayAnswer = [];
+            foreach($array as $object){
+                foreach($arrayAnswer as $objectAnswer){
+                    if($objectAnswer->getLocation() === $object->getLocation()) {
+                        $checked = true;
+                    }
+                }
+                if ($checked === false){
+                    array_push($arrayAnswer, $object);
+                }
+                $checked = false;
+            }
+            return $arrayAnswer;
+        }
+
         public function displayDestination($data){
-            foreach($data as $destination){
+            $array= $this->filterDoubleDestination($data);
+            foreach($array as $destination){
                 $price = $this->getLowerPrice($data, $destination->getLocation());
                 echo('<div class="card" style="width: 18rem;">
                         <img src="'. $destination->getPicture() .'" class="card-img-top" alt="'. $destination->getLocation() .'" height="200px">
