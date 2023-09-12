@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="container-icone text-center">
-    <p>Suivez-nous</p>
+    <p>Suivez-nous !</p>
     <i class="fa-brands fa-facebook" style="color: #ffffff;"></i>
     <i class="fa-brands fa-twitter" style="color: #ffffff;"></i>
     <i class="fa-brands fa-instagram" style="color: #ffffff;"></i>
