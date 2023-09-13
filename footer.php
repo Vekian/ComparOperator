@@ -1,7 +1,7 @@
     <footer>
         <nav class="footer-light bg-black">
             <div class="container">
-                <a href="index.php"><img src="images/logo.gif" height="80"/></a>
+                <a href="index.php"><img src="images/logo2.png" height="60"/></a>
             </div>
     <div class="container">
             <div class="col-md-6">
