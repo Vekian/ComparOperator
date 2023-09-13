@@ -2,6 +2,8 @@
 require_once('../config/autoload.php');
 require_once('../config/db.php');
 
+    $manager = new Manager($db);
+
 // Testons si le fichier a bien été envoyé et s'il n'y a pas d'erreur
 if (isset($_FILES['screenshot']) && $_FILES['screenshot']['error'] == 0)
 {
@@ -15,17 +17,9 @@ if (isset($_FILES['screenshot']) && $_FILES['screenshot']['error'] == 0)
         if (in_array($extension, $allowedExtensions))
         {
             // On peut valider le fichier et le stocker définitivement
-            $destinationDirectory = 'uploads/';
-            $destinationPath = $destinationDirectory . basename($_FILES['screenshot']['name']);
-            
-            if (move_uploaded_file($_FILES['screenshot']['tmp_name'], $destinationPath))
-            {
-                echo "L'envoi a bien été effectué !";
-            }
-            else
-            {
-                echo "Erreur lors du téléchargement du fichier.";
-            }
+            move_uploaded_file($_FILES['screenshot']['tmp_name'], '../images/' . basename($_FILES['screenshot']['name']));
+                        echo "L'envoi a bien été effectué !";
+            $picture = '../images/' . basename($_FILES['screenshot']['name']);
         }
         else
         {
@@ -40,5 +34,16 @@ if (isset($_FILES['screenshot']) && $_FILES['screenshot']['error'] == 0)
 else
 {
     echo "Une erreur est survenue lors de l'envoi du fichier.";
+}
+
+if (isset($_POST['add_destination'])) {
+    // Récupérer les données du formulaire
+    $location = $_POST['destination_location'];
+    $price = $_POST['destination_price'];
+    $tourOperatorId = $_POST['tour_operator_id'];
+
+    // Valider et ajouter la destination à la base de données
+    $manager->addDestination($location, $price, $picture, $tourOperatorId);
+
 }
 ?>

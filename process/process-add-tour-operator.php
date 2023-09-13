@@ -15,17 +15,3 @@ require_once('../config/db.php');
         $manager->addTourOperator($name, $link);
 
     }
-
-    if (isset($_POST['add_destination'])) {
-        // Récupérer les données du formulaire
-        $location = $_POST['destination_location'];
-        $price = $_POST['destination_price'];
-        $tourOperatorId = $_POST['tour_operator_id'];
-    
-        // Valider et ajouter la destination à la base de données
-        $manager->addDestination($location, $price, $tourOperatorId);
-    
-        // Rediriger l'utilisateur après l'ajout
-        header("Location: admin.php");
-        exit();
-    }
