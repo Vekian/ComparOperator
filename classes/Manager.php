@@ -72,8 +72,7 @@
                 WHERE destination.location="'. $name .'" ORDER BY price ASC';
             }
             else {
-                $queryContent = 'SELECT * FROM destination 
-                JOIN tour_operator ON destination.tour_operator_id = tour_operator.id ORDER BY name ASC';
+                $queryContent = 'SELECT * FROM tour_operator ORDER BY name ASC';
             }
             $query = $this->bdd->query($queryContent);
             $operatorsData = $query->fetchAll(PDO :: FETCH_ASSOC);
@@ -83,7 +82,8 @@
                 $destinations = $this->getAllDestination($id);
                 $reviews = $this->getAllReviews($id);
                 $scores = $this->getScores($id);
-                $operator = new TourOperator($operatorData, $destinations, $reviews, $scores);
+                $certificate = $this->getCertificate($id);
+                $operator = new TourOperator($operatorData, $destinations, $reviews, $scores, $certificate);
                 array_push($operators, $operator);
             }
             return $operators;
@@ -96,6 +96,16 @@
                     return $destination;
                 }
             }
+        }
+
+        public function getCertificate($tourOperatorId){
+            $query = $this->bdd->query('SELECT * FROM certificate WHERE tour_operator_id = "' . $tourOperatorId . '"');
+            $certificateData = $query->fetch(PDO :: FETCH_ASSOC);
+            if ($certificateData !== false) {
+                $certificate = new Certificate($certificateData);
+                return $certificate;
+            }
+            else return ("none");
         }
 
         public function getLowerPrice($destinations, $name){
@@ -224,8 +234,11 @@
                         </p>
                         <p>
                             Avis moyen du TO : '. $operator->getAverageScore() .'
-                        </p>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal'. $operator->getId() .'">
+                        </p>');
+            if ($operator->isPremium()) {
+                echo('<a href="#" class="btn btn-primary">Allez sur le site du TO</a>');
+            }
+                        echo('<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal'. $operator->getId() .'">
                             Ajouter un avis
                         </button>
                     </div>
