@@ -2,12 +2,17 @@
 main : #FB8F00
 */
 /* Styles pour le footer */
+body {
+position: relative;
+  min-height: 100vh;
+  padding-bottom: 300px;
+}
+
 footer {
     background-color: #000;
     color: #fff;
     padding-top: 20px;
     position: absolute;
-    margin-top: auto;
     bottom: 0;
     width: 100%;
 }

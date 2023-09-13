@@ -65,10 +65,17 @@
             return $array;
         }
 
-        public function getOperatorByDestination($name) {
-            $query = $this->bdd->query('SELECT * FROM destination 
-                                        JOIN tour_operator ON destination.tour_operator_id = tour_operator.id
-            WHERE destination.location="'. $name .'" ORDER BY price ASC');
+        public function getOperatorByDestination($name ="none") {
+            if ($name != "none") {
+                $queryContent = 'SELECT * FROM destination 
+                JOIN tour_operator ON destination.tour_operator_id = tour_operator.id
+                WHERE destination.location="'. $name .'" ORDER BY price ASC';
+            }
+            else {
+                $queryContent = 'SELECT * FROM destination 
+                JOIN tour_operator ON destination.tour_operator_id = tour_operator.id ORDER BY name ASC';
+            }
+            $query = $this->bdd->query($queryContent);
             $operatorsData = $query->fetchAll(PDO :: FETCH_ASSOC);
             $operators = [];
             foreach($operatorsData as $operatorData) {
@@ -151,7 +158,7 @@
             return intval($this->bdd->lastInsertId());
         }
 
-        public function addReview($name, $tourOperatorId, $message){
+        public function addReview($name, $score, $tourOperatorId, $message){
             $answered = false;
             if (!($this->checkUser($name))){
                 $id = $this->addUser($name);
@@ -174,8 +181,18 @@
                 }
             };
             if ($answered === false) {
-                $this->addMessage($message, $tourOperatorId, $id);
+                $this->addScore($score, $tourOperatorId, $id);
+                if (strlen($message) > 0){
+                    $this->addMessage($message, $tourOperatorId, $id);
+                }
             }
+        }
+        public function addScore($score, $tourOperatorId, $author_id){
+            $query = $this->bdd->prepare('INSERT INTO score (value, tour_operator_id, author_id) VALUES (:value, :tour_operator_id, :author_id)');
+            $query->bindValue(':value', $score);
+            $query->bindValue(':tour_operator_id', $tourOperatorId);
+            $query->bindValue(':author_id', $author_id);
+            $query->execute();
         }
 
         public function displayDestination($data){
@@ -231,12 +248,14 @@
                     <div class="modal-body">
                         <form action="process/add-review.php" method="POST">
                             <label for="pseudo">Votre pseudo</label>
-                            <input type="text" name="pseudo" id="pseudo" />
+                            <input type="text" name="pseudo" id="pseudo" required /><br />
+                            <label for="score">Votre note</label>
+                            <input type="number" class="mt-3 mb-3" name="score" id="score" min="0" max="5" required /><br />
                             <label for="message">Tapez votre message ici</label>
                             <input type="text" name="message" id="message" />
                             <input type="hidden" name="nameDestination" value="'. $destination->getLocation() .'" />
                             <input type="hidden" name="tourOperatorId" value="'. $operator->getId() .'"/>
-                            <input type="submit" value="Envoyer" />
+                            <input type="submit" class="mt-3" value="Envoyer" />
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -277,16 +296,9 @@
         }
 
         public function getAllTourOperators() {
-            $query = $this->bdd->query('SELECT * FROM tour_operator');
-            $operatorsData = $query->fetchAll(PDO::FETCH_ASSOC);
-            $operators = [];
-            foreach ($operatorsData as $operatorData) {
-                $operator = new TourOperator($operatorData, [], [], []);
-                array_push($operators, $operator);
-            }
+            $operators = $this->getOperatorByDestination($name ="none");
             return $operators;
         }
-        
     }
 
 ?>

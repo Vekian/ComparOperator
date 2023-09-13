@@ -5,6 +5,7 @@
 <div class="d-flex flex-wrap justify-content-center">
     <?php
         $manager->displayDestination($manager->getAllDestination());
+        var_dump($manager->getAllTourOperators());
     ?>
 </div>
 <?php
