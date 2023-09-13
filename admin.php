@@ -82,9 +82,26 @@
                 echo '<option value="' . $operator->getId() . '">' . $operator->getName() . '</option>';
             }
             ?>
-        </select>
+        <select name="tour_operator_id" required>
         <br>
         <input type="submit" name="add_destination" value="Ajouter Destination">
+    </form>
+
+    
+    <form action="process/process-get-certificate.php" method="POST" class="d-flex flex-column align-items-center">
+            <h2>Ajouter un certificat premium à un Tour-Opérateur</h2>
+            <label for="nameSignatory">Nom du signataire du contrat</label>
+            <input type="text" name="name" id="nameSignatory" />
+            <select name="tour_operator_id" required>
+                <?php
+                    foreach ($operators as $operator) {
+                        echo '<option value="' . $operator->getId() . '">' . $operator->getName() . '</option>';
+                    }
+                ?>
+            </select>
+            <label>Définir la date de validité</label>
+            <input type="date" name="date" id="date"/>
+            <input type="submit" value="Envoyer" />
     </form>
 
     <!-- Liens pour d'autres actions d'administration -->

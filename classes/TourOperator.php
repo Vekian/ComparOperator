@@ -159,16 +159,18 @@ class TourOperator {
         }
         else return ('Aucune note');
     }
-
+    public function getDateLocale(){
+        $locale = 'fr_FR'; // Définissez la locale de votre choix
+        $dateTime = new DateTime('now', new DateTimeZone('UTC')); // Créez un objet DateTime avec l'heure UTC
+        $dateFormatter = new IntlDateFormatter($locale, IntlDateFormatter::FULL, IntlDateFormatter::FULL);
+        $dateFormatter->setPattern('yyyy-MM-dd HH:mm:ss');
+        $dateLocale = $dateFormatter->format($dateTime);
+        return $dateLocale;
+    }
     public function isPremium() {
-
         if ($this->getCertificate($this->getId()) != "none") {
             $dateExpire= $this->getCertificate($this->getId())->getExpiresAt();
-            $locale = 'fr_FR'; // Définissez la locale de votre choix
-            $dateTime = new DateTime('now', new DateTimeZone('UTC')); // Créez un objet DateTime avec l'heure UTC
-            $dateFormatter = new IntlDateFormatter($locale, IntlDateFormatter::FULL, IntlDateFormatter::FULL);
-            $dateFormatter->setPattern('yyyy-MM-dd HH:mm:ss');
-            $dateLocale = $dateFormatter->format($dateTime);
+            $dateLocale = $this->getDateLocale();
             if ($dateExpire > $dateLocale){
                 return true;
             }

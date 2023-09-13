@@ -205,6 +205,20 @@
             $query->execute();
         }
 
+        public function addCertificate($id, $name, $date){
+            $query = $this->bdd->prepare('INSERT INTO certificate (tour_operator_id, expires_at, signatory) VALUES (:tour_operator_id, :expires_at, :signatory)');
+            $query->bindValue(':tour_operator_id', $id);
+            $query->bindValue(':expires_at', $date);
+            $query->bindValue(':signatory', $name);
+            $query->execute();
+        }
+        public function updateCertificate($id, $name, $date){
+            $query = $this->bdd->prepare('UPDATE certificate SET expires_at = :expires_at, signatory = :signatory WHERE tour_operator_id = ' . $id);
+            $query->bindValue(':expires_at', $date);
+            $query->bindValue(':signatory', $name);
+            $query->execute();
+        }
+
         public function displayDestination($data){
             $array= $this->filterDoubleDestination($data);
             foreach($array as $destination){
