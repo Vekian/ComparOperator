@@ -260,6 +260,33 @@
             }
             return $answer;
         }
+
+        public function addTourOperator($name, $link) {
+            $query = $this->bdd->prepare('INSERT INTO tour_operator (name, link) VALUES (?, ?)');
+            $query->bindValue(':name', $name);
+            $query->bindValue(':link', $link);
+            $query->execute([$name, $link]);
+        }  
+    
+        public function addDestination($location, $price, $tourOperatorId) {
+            $query = $this->bdd->prepare('INSERT INTO destination (location, price, tour_operator_id) VALUES (?, ?, ?)');
+            $query->bindValue(':location', $location);
+            $query->bindValue(':price', $price);
+            $query->bindValue(':tour_operator_id', $tourOperatorId);
+            $query->execute([$location, $price, $tourOperatorId]);
+        }
+
+        public function getAllTourOperators() {
+            $query = $this->bdd->query('SELECT * FROM tour_operator');
+            $operatorsData = $query->fetchAll(PDO::FETCH_ASSOC);
+            $operators = [];
+            foreach ($operatorsData as $operatorData) {
+                $operator = new TourOperator($operatorData, [], [], []);
+                array_push($operators, $operator);
+            }
+            return $operators;
+        }
+        
     }
 
 ?>

@@ -25,7 +25,7 @@ footer {
 
 /* Styles pour le texte de droits d'auteur au bas du footer */
 footer p {
-    position: absolute;
+    /* position: absolute; */
     bottom: 1px; /* Espacement par rapport au bas du footer */
     width: 100%;
 }

@@ -2,43 +2,43 @@
     require_once('config/autoload.php');
     require_once('config/db.php');
 
-// Vérifier si l'utilisateur est authentifié en tant qu'administrateur (vous devez implémenter l'authentification)
-$isAdmin = true; // Remplacez ceci par votre logique d'authentification
+    // Vérifier si l'utilisateur est authentifié en tant qu'administrateur (vous devez implémenter l'authentification)
+    $isAdmin = true; // Remplacez ceci par votre logique d'authentification
 
-if (!$isAdmin) {
-    // Rediriger les utilisateurs non autorisés vers une page d'authentification ou une page d'accueil
-    header("Location: index.php");
-    exit();
-}
+    if (!$isAdmin) {
+        // Rediriger les utilisateurs non autorisés vers une page d'authentification ou une page d'accueil
+        header("Location: index.php");
+        exit();
+    }
 
-// Traitement de la soumission du formulaire pour ajouter un tour-opérateur
-if (isset($_POST['add_tour_operator'])) {
-    // Récupérer les données du formulaire
-    $name = $_POST['tour_operator_name'];
-    $link = $_POST['tour_operator_link'];
+    // Instance du gestionnaire (Manager)
+    $manager = new Manager($db);
 
-    // Valider et ajouter le tour-opérateur à la base de données (vous devez implémenter cette fonction)
-    // Exemple : addTourOperator($name, $link);
+    // Traitement de la soumission du formulaire pour ajouter un tour-opérateur
+    if (isset($_POST['add_tour_operator'])) {
+        // Récupérer les données du formulaire
+        $name = $_POST['tour_operator_name'];
+        $link = $_POST['tour_operator_link'];
 
-    // Rediriger l'utilisateur après l'ajout
-    header("Location: admin.php");
-    exit();
-}
+        // Valider et ajouter le tour-opérateur à la base de données
+        $manager->addTourOperator($name, $link);
 
-// Traitement de la soumission du formulaire pour ajouter une destination à un tour-opérateur
-if (isset($_POST['add_destination'])) {
-    // Récupérer les données du formulaire
-    $location = $_POST['destination_location'];
-    $price = $_POST['destination_price'];
-    $tourOperatorId = $_POST['tour_operator_id'];
+    }
 
-    // Valider et ajouter la destination à la base de données (vous devez implémenter cette fonction)
-    // Exemple : addDestination($location, $price, $tourOperatorId);
+    if (isset($_POST['add_destination'])) {
+        // Récupérer les données du formulaire
+        $location = $_POST['destination_location'];
+        $price = $_POST['destination_price'];
+        $tourOperatorId = $_POST['tour_operator_id'];
+    
+        // Valider et ajouter la destination à la base de données
+        $manager->addDestination($location, $price, $tourOperatorId);
+    
+        // Rediriger l'utilisateur après l'ajout
+        header("Location: admin.php");
+        exit();
+    }
 
-    // Rediriger l'utilisateur après l'ajout
-    header("Location: admin.php");
-    exit();
-}
 ?>
 
 <!DOCTYPE html>
@@ -76,9 +76,12 @@ if (isset($_POST['add_destination'])) {
         <label for="tour_operator_id">Sélectionnez un Tour-Opérateur:</label>
         <select name="tour_operator_id" required>
             <!-- liste déroulante avec les noms des Tour-Opérateurs depuis la base de données -->
-            <option value="1">Salaun Holidays</option>
-            <option value="2">Fram</option>
-            <!-- Ajoutez les autres options ici -->
+            <?php
+            $operators = $manager->getAllTourOperators(); // Récupérer tous les tour-opérateurs depuis la base de données
+            foreach ($operators as $operator) {
+                echo '<option value="' . $operator->getId() . '">' . $operator->getName() . '</option>';
+            }
+            ?>
         </select>
         <br>
         <input type="submit" name="add_destination" value="Ajouter Destination">
