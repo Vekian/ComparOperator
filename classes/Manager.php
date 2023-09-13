@@ -314,12 +314,13 @@
             $query->execute([$name, $link]);
         }  
     
-        public function addDestination($location, $price, $tourOperatorId) {
-            $query = $this->bdd->prepare('INSERT INTO destination (location, price, tour_operator_id) VALUES (?, ?, ?)');
+        public function addDestination($location, $price,  $picture, $tourOperatorId) {
+            $query = $this->bdd->prepare('INSERT INTO destination (location, price, picture, tour_operator_id) VALUES (?, ?, ?, ?)');
             $query->bindValue(':location', $location);
             $query->bindValue(':price', $price);
+            $query->bindValue(':picture', $picture);
             $query->bindValue(':tour_operator_id', $tourOperatorId);
-            $query->execute([$location, $price, $tourOperatorId]);
+            $query->execute([$location, $price, $picture, $tourOperatorId]);
         }
 
         public function getAllTourOperators() {
