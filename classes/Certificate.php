@@ -39,6 +39,14 @@
 
                 return $this;
         }
+        public function __construct($data){
+                $this->hydrate($data);
+        }
+
+        public function hydrate($data){
+                $this->setExpiresAt($data['expires_at']);
+                $this->setSignatory($data['signatory']);
+        }
     }
 
 

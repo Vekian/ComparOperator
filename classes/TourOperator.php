@@ -135,17 +135,18 @@ class TourOperator {
         return $this;
     }
 
-    public function __construct($data, $destinations, $reviews, $scores) {
-        $this->hydrate($data, $destinations, $reviews, $scores);
+    public function __construct($data, $destinations, $reviews, $scores, $certificate) {
+        $this->hydrate($data, $destinations, $reviews, $scores, $certificate);
     }
 
-    public function hydrate($data, $destinations, $reviews, $scores){
+    public function hydrate($data, $destinations, $reviews, $scores, $certificate){
         $this->setId($data['id']);
         $this->setName($data['name']);
         $this->setLink($data['link']);
         $this->setDestinations($destinations);
         $this->setReviews($reviews);
         $this->setScores($scores);
+        $this->setCertificate($certificate);
     }
 
     public function getAverageScore(){
@@ -157,6 +158,27 @@ class TourOperator {
             return $answer/count($this->scores);
         }
         else return ('Aucune note');
+    }
+
+    public function isPremium() {
+
+        if ($this->getCertificate($this->getId()) != "none") {
+            $dateExpire= $this->getCertificate($this->getId())->getExpiresAt();
+            $locale = 'fr_FR'; // Définissez la locale de votre choix
+            $dateTime = new DateTime('now', new DateTimeZone('UTC')); // Créez un objet DateTime avec l'heure UTC
+            $dateFormatter = new IntlDateFormatter($locale, IntlDateFormatter::FULL, IntlDateFormatter::FULL);
+            $dateFormatter->setPattern('yyyy-MM-dd HH:mm:ss');
+            $dateLocale = $dateFormatter->format($dateTime);
+            if ($dateExpire > $dateLocale){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
     }
 }
 
