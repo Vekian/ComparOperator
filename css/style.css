@@ -82,56 +82,59 @@ footer p {
     margin-bottom: 30px; /* Espacement entre le texte et les icônes */
 }
 
-.container-paiement p {
-    font-size: 16px;
-    color: #fff;
-    margin-bottom: 30px; /* Espacement entre le texte et les icônes */
-}
-
-  .card {
+#listDestinations .card {
     height: 250px;
     background-size: 100% 100% !important;
     background-position: center;
     font-weight: 800;
     color: #106da7;
     position: relative;
-    border-radius: 5px;
+    border-radius: 15px;
     border: none !important;
     transition: background-size 0.3s linear !important;
     box-shadow: 3px 4px 6px rgba(0, 0, 0, 0.1);
-    margin: 5px;
+    margin: 10px;
     margin-top: 20px;
   }
 
-  .card:hover {
+  #listDestinations .card:hover, #listDestinations .card:active {
     background-size: 120% 120% !important;
   }
-  .card-user {
+  #listDestinations .card-user {
     position: absolute;
     right: 10px;
     top: 10px;
   }
-  .card-category {
+  #listDestinations .card-category {
     position: absolute;
     top: 50%;
     font-size: 20px;
     background-color: #ffffff !important;
+    border-radius: 0px 10px 10px 0px;
   }
-  .card-description {
+  #listDestinations .card-description {
     position: absolute;
     bottom: 0px;
     left: 0px;
-    background-color: #ffeee3 !important;
+    background-color: #ecd8b2 !important;
     width: 100%;
   }
-  .card p {
+  #listDestinations .card p {
     font-size: 22px;
   }
-  .card-link {
+  #listDestinations .card-link {
     position: absolute;
     top: 0;
     bottom: 0;
     width: 100%;
     z-index:2;
+    background: rgb(255, 255, 255);
+    opacity: 0;
+  }
+  #listDestinations .card-link:hover, .card-link:active{
+    opacity: 0.1;
   }
 
+  #listDestinations .knowMore {
+    color: #faa710;
+  }
