@@ -82,6 +82,12 @@ footer p {
     margin-bottom: 30px; /* Espacement entre le texte et les icônes */
 }
 
+.container-paiement p {
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px; /* Espacement entre le texte et les icônes */
+}
+
 #listDestinations .card {
     height: 250px;
     background-size: 100% 100% !important;
