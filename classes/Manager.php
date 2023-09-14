@@ -223,12 +223,14 @@
             $array= $this->filterDoubleDestination($data);
             foreach($array as $destination){
                 $price = $this->getLowerPrice($data, $destination->getLocation());
-                echo('<div class="card" style="width: 18rem;">
-                        <img src="'. $destination->getPicture() .'" class="card-img-top" alt="'. $destination->getLocation() .'" height="200px">
-                        <div class="card-body">
-                        <h5 class="card-title">Nom : '. $destination->getLocation() .'</h5>
-                        <p class="card-text">À partir de '. $price .' euros</p>
-                        <a href="destination.php?name='. $destination->getLocation() .'" class="btn btn-primary">En savoir plus </a>
+                echo('<div class="cardDestination col-xxl-3 col-lg-4 col-sm-6 col-12">
+                        <div class="card" style="background-image: url(\''. $destination->getPicture() .'\');">
+                            <div class="card-category">À partir de '. $price .' euros</div>
+                            <div class="card-description p-2 d-flex">
+                                <p>'. $destination->getLocation() .'</p>
+                                <button class="btn btn-primary ms-auto">En savoir plus</button>
+                            </div>
+                            <a class="card-link" href="destination.php?name='. $destination->getLocation() .'" ></a>
                         </div>
                     </div>');
             }
