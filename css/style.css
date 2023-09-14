@@ -76,3 +76,9 @@ footer p {
     color: #fff;
     margin-bottom: 30px; /* Espacement entre le texte et les icônes */
 }
+
+.container-paiement p {
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px; /* Espacement entre le texte et les icônes */
+}

@@ -4,7 +4,7 @@ class TourOperator {
     private int $id;
     private string $name;
     private string $link;
-    private $certificate = false;
+    private $certificate;
     private $destinations;
     private $reviews;
     private $scores;

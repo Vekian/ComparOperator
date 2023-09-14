@@ -1,19 +1,23 @@
 <?php
-    require_once('config/autoload.php');
-    require_once('config/db.php');
-    $manager = new Manager($db);
+require_once('config/autoload.php');
+require_once('config/db.php');
+if (!isset($_SESSION["username"])) {
+    header("Location: login.php");
+    exit;
+}
+$manager = new Manager($db);
 ?>
 
 <?php include("header.php"); ?>
-
+<a href="logout.php">Se déconnecter</a>
 <h1>Page d'Administration</h1>
 
 <!-- Formulaire pour ajouter un tour-opérateur -->
-<h2>Ajouter un Tour-Opérateur</h2>
-<form action="process/process-add-tour-operator.php" method="POST">
-    <label for="tour_operator_name">Nom du Tour-Opérateur:</label>
-    <input type="text" name="tour_operator_name" required>
-    <br>
+<form action="process/process-add-tour-operator.php" method="POST" class="d-flex flex-column align-items-center">
+    <h2>Ajouter un Tour-Opérateur</h2>
+<label for="tour_operator_name">Nom du Tour-Opérateur:</label>
+<input type="text" name="tour_operator_name" required>
+<br>
     <label for="tour_operator_link">Lien vers le site officiel:</label>
     <input type="text" name="tour_operator_link" required>
     <br>
@@ -21,8 +25,9 @@
 </form>
 
 <!-- Formulaire pour ajouter une destination à un tour-opérateur -->
-<h2>Ajouter une Destination à un Tour-Opérateur</h2>
-<form action="process/process-add-destination.php" method="POST" enctype="multipart/form-data">
+
+<form action="process/process-add-destination.php" method="POST" enctype="multipart/form-data" class="d-flex flex-column align-items-center">
+    <h2>Ajouter une Destination à un Tour-Opérateur</h2>
     <label for="destination_location">Location de la Destination:</label>
     <input type="text" name="destination_location" required>
     <br>
