@@ -138,3 +138,79 @@ footer p {
   #listDestinations .knowMore {
     color: #faa710;
   }
+
+.modal-content label, .modal-content .form-group h4, .modal-content .form-group button{
+    color: #faa710;
+}
+
+#align-form{
+    margin-top: 20px;
+}
+.modal-content .form-group p a{
+    color: white;
+}
+
+.modal-content .form-group input, .form-group textarea{
+    background-color: #ccf2f5;
+    border: 1px solid #051a30;
+    border-radius: 12px;
+}
+
+.modal-content form{
+    border: 1px solid #030e1a;
+    background-color: #335F8A;
+    border-radius: 5px;
+    padding: 20px;
+ }
+ .modal-content #post{
+    margin: 10px;
+    padding: 6px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-align: center;
+    background-color: #ecb21f;
+    border-color: #a88734 #9c7e31 #846a29;
+    color: rgb(255, 255, 255);
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 13px;
+    width: 50%;
+}
+#destinationMainImg{
+    object-fit: cover;
+    width: 100%;
+    object-position: 50% 80%;
+}
+
+#comments {
+    color: #335F8A;
+    width: 400px;
+	background-color: #ecd8b2;
+	border-radius: 0px 4px 4px 4px ;
+	box-shadow: 10px 10px 5px #aaaaaa;
+}
+
+#authorComments {
+    border-radius: 4px 4px 0px 0px ;
+    box-shadow: 10px 0px 5px #aaaaaa;
+    background-color: #0f2a46 !important;
+    border-bottom: 3px black solid;
+}
+
+#listComments {
+    height: 250px !important;
+    overflow: scroll;
+    font-weight: 600;
+}
+
+#titleComments {
+    background-color: #0f2a46 !important;
+    margin-bottom: 0;
+    box-shadow: 0px 10px 5px #aaaaaa;
+}
+#sectionComments {
+    background-color: #ffffff;
+}
+.checked {
+    color: orange;
+  }
