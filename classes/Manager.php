@@ -225,10 +225,10 @@
                 $price = $this->getLowerPrice($data, $destination->getLocation());
                 echo('<div class="cardDestination col-xxl-3 col-lg-4 col-sm-6 col-12">
                         <div class="card" style="background-image: url(\''. $destination->getPicture() .'\');">
-                            <div class="card-category">À partir de '. $price .' euros</div>
+                            <div class="card-category p-1">À partir de '. $price .' euros</div>
                             <div class="card-description p-2 d-flex">
-                                <p>'. $destination->getLocation() .'</p>
-                                <button class="btn btn-primary ms-auto">En savoir plus</button>
+                                <p class="ms-2">'. $destination->getLocation() .'</p>
+                                <p class="ms-auto knowMore"> En savoir plus ></p>
                             </div>
                             <a class="card-link" href="destination.php?name='. $destination->getLocation() .'" ></a>
                         </div>
