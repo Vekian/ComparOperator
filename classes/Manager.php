@@ -51,6 +51,18 @@
             }
             return $array;
         }
+        public function getScore($name){
+            $query = $this->bdd->query('SELECT value FROM score
+                                        JOIN author ON score.author_id = author.id
+                                        WHERE name = "'. $name .'"');
+            $scoreData = $query->fetch(PDO :: FETCH_ASSOC);
+            if($scoreData == false) {
+                $score = [];
+                $score['value'] = "Aucune note";
+                return $score;
+            }
+            return $scoreData;
+        }
 
         public function getScores($id){
             $query = $this->bdd->query('SELECT * FROM score
@@ -236,10 +248,26 @@
             }
         }
 
+        public function displayScore($score){
+            $answer = "";
+            if ($score == "Aucune note") {
+                $answer .= "Aucune note";
+            } else{
+            for ($i = 0; $i < 5; $i++){
+                if (round($score) > $i){
+                    $answer .= '<span class="fa fa-star checked"></span>';
+                }
+                else {
+                    $answer .= '<span class="fa fa-star"></span>';
+                }
+            }}
+            return $answer;
+        }
+
         public function displayTourOperator($operator, $destination){
-            echo('<div class="d-flex justify-content-center flex-wrap">
-                    <div class="col-3 d-flex flex-column align-items-center border text-center">
-                        <h2 class="bg-light col-12">
+            echo('<div class="d-flex justify-content-center flex-wrap mb-5">
+                    <div class="col-lg-5 col-xl-4 col-12 d-flex flex-column align-items-center border text-center">
+                        <h2 class="text-warning col-12"  id="titleComments">
                             '. $operator->getName() .'
                         </h2>
                         <p>
@@ -249,7 +277,7 @@
                             Prix: '. $destination->getPrice() .'
                         </p>
                         <p>
-                            Avis moyen du TO : '. $operator->getAverageScore() .'
+                            Avis moyen du TO : '. $this->displayScore($operator->getAverageScore()) .'
                         </p>');
             if ($operator->isPremium()) {
                 echo('<a href="#" class="btn btn-primary">Allez sur le site du TO</a>');
@@ -258,39 +286,38 @@
                             Ajouter un avis
                         </button>
                     </div>
-                    <div class="col-3 border text-center">
-                        <h4 class="bg-light">
+                    <div class="col-lg-5 col-xl-4 col-12 border" id="sectionComments">
+                        <h2 class="text-warning text-center" id="titleComments">
                             Avis
-                        </h4>
+                        </h2>
                         
-                        '. $this->displayReviews($this->getAllReviews($operator->getId())) .'
+                        <div class="d-flex flex-column align-items-center" id="listComments">'. $this->displayReviews($this->getAllReviews($operator->getId())) .'</div>
                     </div>
                 </div>
 
               <div class="modal fade" id="exampleModal'. $operator->getId() .'" tabindex="-1" aria-labelledby="exampleModalLabel'. $operator->getId() .'" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel'. $operator->getId() .'">Ajouter un avis sur '. $operator->getName() .'</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="process/add-review.php" method="POST">
-                            <label for="pseudo">Votre pseudo</label>
-                            <input type="text" name="pseudo" id="pseudo" required /><br />
-                            <label for="score">Votre note</label>
-                            <input type="number" class="mt-3 mb-3" name="score" id="score" min="0" max="5" required /><br />
-                            <label for="message">Tapez votre message ici</label>
-                            <input type="text" name="message" id="message" />
+                    <form id="algin-form" action="process/add-review.php" method="POST">
+                        <div class="form-group">
+                            <h4>Leave a comment</h4>
+                            <label for="pseudo">Name</label>
+                            <input type="text" name="pseudo" id="pseudo" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="pseudo">Name</label>
+                            <input type="number" name="score" id="score" min="0" max="5" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message (optionnel)</label>
+                            <textarea name="message" id=""message cols="30" rows="5" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
                             <input type="hidden" name="nameDestination" value="'. $destination->getLocation() .'" />
                             <input type="hidden" name="tourOperatorId" value="'. $operator->getId() .'"/>
-                            <input type="submit" class="mt-3" value="Envoyer" />
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
+                            <input type="submit" value="Envoyer" id="post" class="btn" />
+                        </div>
+                    </form>
                   </div>
                 </div>
               </div>');
@@ -299,12 +326,19 @@
         public function displayReviews($reviews) {
             $answer = '';
             foreach ($reviews as $review) {
-            $answer .= '<div class="border m-3">
-                    '. $review->getMessage() .'
+            $answer .= '<div class="mt-2 mb-2 text-light">
+            <div class="d-flex">
+                <div class="col-4 bg-light p-1 ps-2 text-warning" id="authorComments">Par 
+                    '. $review->getAuthor() .' : 
+                </div>
+                <div class="ms-auto text-dark mt-1">
+                '. $this->displayScore($this->getScore($review->getAuthor())['value']) .'
+                </div>
             </div>
-            <div>Par 
-                '. $review->getAuthor() .'
-            </div>';
+            <div class=" text-center p-2" id="comments">
+                    '. $review->getMessage() .'
+            </div></div>
+            ';
             }
             return $answer;
         }
