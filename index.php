@@ -15,7 +15,7 @@
         <input type="submit" value="Rechercher" class="btn btn-primary mt-4" />
     </form>
 </div>
-<div class="d-flex flex-wrap justify-content-center">
+<div class="d-flex flex-wrap justify-content-center" id="listDestinations">
     <?php
         $manager->displayDestination($manager->getAllDestination());
     ?>
