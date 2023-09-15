@@ -1,12 +1,25 @@
-<form action="process/processlogin.php" method="POST">
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">login</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<?php include('header.php'); ?>
+
+<div class="container">
+    <div class="mt-5 pt-5"></div> 
+    <form action="process/processlogin.php" method="POST">
+        <div class="form-group col-12 col-md-6 mx-auto">
+            <label for="exampleDropdownFormEmail2">Identifiant</label>
+            <input type="email" class="form-control" id="exampleDropdownFormEmail2" placeholder="Admin">
+        </div>
+        <div class="form-group col-12 col-md-6 mx-auto">
+            <label for="exampleDropdownFormPassword2">Mot de passe</label>
+            <input type="password" class="form-control" id="exampleDropdownFormPassword2" placeholder="Password">
+        </div>
+        <div class="form-check col-12 col-md-6 mx-auto">
+            <input type="checkbox" class="form-check-input" id="dropdownCheck2">
+            <label class="form-check-label" for="dropdownCheck2">
+                Remember me
+            </label>
+            <br>
+            <button type="submit" class="btn btn-primary">OK</button>
+        </div>
+    </form>
+</div>
+
+<?php include('footer.php'); ?>

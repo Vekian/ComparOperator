@@ -1,11 +1,13 @@
 <footer>
-    <nav class="footer-light d-flex justify-content-center">
+    <nav class="footer-light d-flex justify-content-around">
         <div>
             <a href="index.php"><img src="images/logo2.png" height="150"/></a>
         </div>
         <div class="d-flex flex-column-reverse">
                 <div >
                     <p class="text-white">&copy; 2023 ComparOperator. Tous droits réservés.</p>
+                    <p class="text-white" id="copyrightBelow">La reproduction d'une quelconque partie du contenu de ce 
+                    </br>site est strictement interdite sans autorisation.</p>
                 </div>
         </div>
         <div class="container-icone">
