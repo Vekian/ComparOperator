@@ -266,25 +266,30 @@
 
         public function displayTourOperator($operator, $destination){
             echo('<div class="d-flex justify-content-center flex-wrap mb-5">
-                    <div class="col-lg-5 col-xl-4 col-12 d-flex flex-column align-items-center border text-center">
-                        <h2 class="text-warning col-12"  id="titleComments">
-                            '. $operator->getName() .'
+                    <div class="col-lg-5 col-xl-4 col-12 d-flex flex-column  border" id="infosTO">
+                        <h2 class="text-warning col-12 text-center"  id="titleComments">
+                            Récapitulatif de l\'offre
                         </h2>
-                        <p>
-                            Destination: '. $destination->getLocation() .'
+                        <p class="mt-4 ps-3 border-bottom">
+                            <span class="text-warning"> Destination: </span> '. $destination->getLocation() .'
                         </p>
-                        <p>
-                            Prix: '. $destination->getPrice() .'
+                        <p class=" ps-3">
+                            <span class="text-warning"> Tour Opérateur: </span> '. $operator->getName() .'
                         </p>
-                        <p>
-                            Avis moyen du TO : '. $this->displayScore($operator->getAverageScore()) .'
-                        </p>');
+                        <p class=" ps-3">
+                            <span class="text-warning"> Prix:</span> '. $destination->getPrice() .'
+                        </p>
+                        <p class=" ps-3">
+                            <span class="text-warning"> Avis moyen du TO :</span> '. $this->displayScore($operator->getAverageScore()) .'
+                        </p>
+                        <div class="d-flex justify-content-center">');
             if ($operator->isPremium()) {
-                echo('<a href="#" class="btn btn-primary">Allez sur le site du TO</a>');
+                echo('<button class="mb-2" onclick="window.location.href = \'#\';">Allez sur le site du TO</button>');
             }
-                        echo('<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal'. $operator->getId() .'">
+                        echo('<button class="mb-2 ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal'. $operator->getId() .'">
                             Ajouter un avis
                         </button>
+                        </div>
                     </div>
                     <div class="col-lg-5 col-xl-4 col-12 border" id="sectionComments">
                         <h2 class="text-warning text-center" id="titleComments">
@@ -300,22 +305,31 @@
                   <div class="modal-content">
                     <form id="algin-form" action="process/add-review.php" method="POST">
                         <div class="form-group">
-                            <h4>Leave a comment</h4>
+                            <h4>Laissez un avis</h4>
                             <label for="pseudo">Name</label>
-                            <input type="text" name="pseudo" id="pseudo" class="form-control">
+                            <input type="text" name="pseudo" id="pseudo" class="form-control" required>
+                        </div>
+                        <p class="mb-0 mt-3 text-warning me-auto">Votre note</p>
+                        <div class="rating d-flex flex-row-reverse justify-content-center">
+                            <input type="radio" id="star5" name="score" value="5" />
+                            <label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
+                            <input type="radio" id="star4" name="score" value="4" />
+                            <label class="star" for="star4" title="Great" aria-hidden="true"></label>
+                            <input type="radio" id="star3" name="score" value="3" />
+                            <label class="star" for="star3" title="Very good" aria-hidden="true"></label>
+                            <input type="radio" id="star2" name="score" value="2" />
+                            <label class="star" for="star2" title="Good" aria-hidden="true"></label>
+                            <input type="radio" id="star1" name="score" value="1" />
+                            <label class="star" for="star1" title="Bad" aria-hidden="true"></label>
                         </div>
                         <div class="form-group">
-                            <label for="pseudo">Name</label>
-                            <input type="number" name="score" id="score" min="0" max="5" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message (optionnel)</label>
+                        <br /><label for="message">Message (optionnel)</label>
                             <textarea name="message" id=""message cols="30" rows="5" class="form-control"></textarea>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group text-center">
                             <input type="hidden" name="nameDestination" value="'. $destination->getLocation() .'" />
                             <input type="hidden" name="tourOperatorId" value="'. $operator->getId() .'"/>
-                            <input type="submit" value="Envoyer" id="post" class="btn" />
+                            <button class="mt-3" type="submit" id="post">Envoyer</button>
                         </div>
                     </form>
                   </div>
@@ -326,7 +340,7 @@
         public function displayReviews($reviews) {
             $answer = '';
             foreach ($reviews as $review) {
-            $answer .= '<div class="mt-2 mb-2 text-light">
+            $answer .= '<div class="mt-2 mb-2 text-light col-10  text-center">
             <div class="d-flex">
                 <div class="col-4 bg-light p-1 ps-2 text-warning" id="authorComments">Par 
                     '. $review->getAuthor() .' : 
@@ -335,7 +349,7 @@
                 '. $this->displayScore($this->getScore($review->getAuthor())['value']) .'
                 </div>
             </div>
-            <div class=" text-center p-2" id="comments">
+            <div class=" text-center p-2 col-12" id="comments">
                     '. $review->getMessage() .'
             </div></div>
             ';

@@ -8,7 +8,15 @@ position: relative;
   padding-bottom: 300px;
   background-color: #ccf2f5;
 }
+header {
+    z-index: 100;
+}
 
+header {
+    position: fixed;
+    top : 0;
+    width : 100%;
+}
 header img {
     transition: transform 1s, filter 1s;
 }
@@ -18,10 +26,12 @@ header a{
     font-size: xx-large;
     color: #faa710 !important;
     text-decoration: none;
+    padding-right: 30px;
 }
 
-header a:hover{
-    text-decoration: underline;
+#headerLink:hover{
+    background-color: rgba(159, 159, 163, 0.295);
+    padding: 30px;
 }
 
 header img:hover {
@@ -43,8 +53,8 @@ header img:hover {
 }
 
 .navbar {
-    background-color: rgb(51, 94, 138) !important;
-    background: linear-gradient(180deg, rgb(51, 94, 138) 0%, rgb(20, 55, 90) 40%, rgb(2, 26, 51) 74%);
+    background-color : transparent !important;
+    background: linear-gradient(180deg, #051627 0%, rgba(0, 1, 8, 0.884) 35%, rgba(0, 0, 0, 0) 100%);
 }
 
 footer {
@@ -139,7 +149,7 @@ footer p {
     color: #faa710;
   }
 
-.modal-content label, .modal-content .form-group h4, .modal-content .form-group button{
+.modal-content label, .modal-content .form-group h4{
     color: #faa710;
 }
 
@@ -162,20 +172,7 @@ footer p {
     border-radius: 5px;
     padding: 20px;
  }
- .modal-content #post{
-    margin: 10px;
-    padding: 6px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    text-align: center;
-    background-color: #ecb21f;
-    border-color: #a88734 #9c7e31 #846a29;
-    color: rgb(255, 255, 255);
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 13px;
-    width: 50%;
-}
+ 
 #destinationMainImg{
     object-fit: cover;
     width: 100%;
@@ -184,7 +181,7 @@ footer p {
 
 #comments {
     color: #335F8A;
-    width: 400px;
+
 	background-color: #ecd8b2;
 	border-radius: 0px 4px 4px 4px ;
 	box-shadow: 10px 10px 5px #aaaaaa;
@@ -198,7 +195,7 @@ footer p {
 }
 
 #listComments {
-    height: 250px !important;
+    height: 280px !important;
     overflow: scroll;
     font-weight: 600;
 }
@@ -208,9 +205,107 @@ footer p {
     margin-bottom: 0;
     box-shadow: 0px 10px 5px #aaaaaa;
 }
-#sectionComments {
+
+#infosTO span {
+    font-weight: 700;
+    font-size : 20px;
+}
+#infosTO p {
+    color: #335f8a;
+    font-weight: 600;
+}
+
+#sectionComments, #infosTO {
     background-color: #ffffff;
 }
 .checked {
     color: orange;
+  }
+
+
+  .rating {
+    border: none;
+  }
+  
+  .rating > label {
+    color: #90A0A3;
+  }
+  
+  .rating > label:before {
+    font-size: 2em;
+    font-family: FontAwesome;
+    content: "\f005";
+    display: inline-block;
+  }
+  
+  .rating > input {
+    display: none;
+  }
+  
+  .rating > input:checked ~ label,
+  .rating:not(:checked) > label:hover,
+  .rating:not(:checked) > label:hover ~ label {
+    color: #F79426;
+  }
+  
+  .rating > input:checked + label:hover,
+  .rating > input:checked ~ label:hover,
+  .rating > label:hover ~ input:checked ~ label,
+  .rating > input:checked ~ label:hover ~ label {
+    color: #FECE31;
+  }
+
+  button{
+    position: relative;
+    width: 210px;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    outline: none;
+    cursor: pointer;
+    background: #0f2a46;
+    overflow: hidden;
+    transition: 0.6s;
+    font-weight: 700;
+  }
+
+  button{
+    color: #faa710;
+    border-color: #faa710;
+  }
+  button:before, button:after{
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    height: 100%;
+    filter: blur(30px);
+    opacity: 0.4;
+    transition: 0.6s;
+  }
+  button:before{
+    width: 60px;
+    background: rgba(255,255,255,0.6);
+    transform: translateX(-130px) skewX(-45deg);
+  }
+  button:after{
+    width: 30px;
+    background: rgba(255,255,255,0.6);
+    transform: translateX(-130px) skewX(-45deg);
+  }
+  button:hover:before,
+  button:hover:after{
+    opacity: 0.6;
+    transform: translateX(320px) skewX(-45deg);
+  }
+  button:hover{
+    color: #40688d;
+    font-weight: 700;
+  }
+
+  button:hover{
+    background: #faa710;
   }
