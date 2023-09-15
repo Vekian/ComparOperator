@@ -47,6 +47,7 @@ header img:hover {
     background: linear-gradient(180deg, rgb(51, 94, 138) 0%, rgb(20, 55, 90) 40%, rgb(2, 26, 51) 74%);
 }
 
+/*footer*/
 footer {
     position: absolute;
     bottom: 0;
@@ -58,9 +59,13 @@ footer nav {
     background-color: #335F8A !important;
 }
 
+#copyrightBelow{
+    font-size: 10px;
+}
+
 .container-icone {
     text-align: center;
-    margin-top: 30px; /* Espacement entre le texte de droits d'auteur et les icônes */
+    margin-top: 60px; /* Espacement entre le texte de droits d'auteur et les icônes */
 }
 
 .container-icone i {
@@ -69,24 +74,33 @@ footer nav {
     bottom: 20px;
 }
 
-/* Styles pour le texte de droits d'auteur au bas du footer */
 footer p {
-    /* position: absolute; */
-    bottom: 1px; /* Espacement par rapport au bas du footer */
-    width: 100%;
+    margin-bottom: 5px; /* Espacement par rapport au bas du footer */
 }
 
 .container-icone p {
     font-size: 16px;
     color: #fff;
-    margin-bottom: 30px; /* Espacement entre le texte et les icônes */
+    margin-bottom: 5px; /* Espacement entre le texte et les icônes */
+}
+
+.container-paiement {
+    text-align: center;
+    margin-top: 60px; /* Espacement entre le texte de droits d'auteur et les icônes */
+}
+
+.container-paiement i {
+    font-size: 24px; /* Taille des icônes */
+    margin: 0 10px; /* Espacement horizontal entre les icônes */
+    bottom: 20px;
 }
 
 .container-paiement p {
     font-size: 16px;
     color: #fff;
-    margin-bottom: 30px; /* Espacement entre le texte et les icônes */
+    margin-bottom: 5px; /* Espacement entre le texte et les icônes */
 }
+/*footer fin*/
 
 #listDestinations .card {
     height: 250px;
