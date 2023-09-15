@@ -230,6 +230,19 @@
             $query->bindValue(':signatory', $name);
             $query->execute();
         }
+        public function updateTO($id, $name, $link) {
+            $query = $this->bdd->prepare('UPDATE tour_operator SET name = :name, link = :link WHERE id = ' . $id);
+            $query->bindValue(':name', $name);
+            $query->bindValue(':link', $link);
+            $query->execute();
+        }
+        public function updateDestination($id, $name, $price, $tourOperatorId){
+            $query = $this->bdd->prepare('UPDATE destination SET location = :location, price = :price, tour_operator_id = :tour_operator_id WHERE id = ' . $id);
+            $query->bindValue(':name', $name);
+            $query->bindValue(':link', $link);
+            $query->bindValue(':tour_operator_id', $tourOperatorId);
+            $query->execute();
+        }
 
         public function displayDestination($data){
             $array= $this->filterDoubleDestination($data);
@@ -284,7 +297,7 @@
                         </p>
                         <div class="d-flex justify-content-center">');
             if ($operator->isPremium()) {
-                echo('<button class="mb-2" onclick="window.location.href = \'#\';">Allez sur le site du TO</button>');
+                echo('<button class="mb-2" onclick="window.location.href = \''. $operator->getLink() .'\';">Allez sur le site du TO</button>');
             }
                         echo('<button class="mb-2 ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal'. $operator->getId() .'">
                             Ajouter un avis
