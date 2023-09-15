@@ -21,7 +21,7 @@
         <nav class="navbar navbar-light bg-light">
             <div class="container">
                 <a href="index.php"><img src="images/logo2.png" height="120"/></a>
-                <a href="index.php" class="display-6">Accueil</a>
+                <a href="index.php" class="display-6" id="headerLink">Accueil</a>
             </div>
         </nav>
     </header>
