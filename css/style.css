@@ -295,6 +295,7 @@ footer p {
   button{
     color: #faa710;
     border-color: #faa710;
+    z-index: 1;
   }
   button:before, button:after{
     position: absolute;
@@ -329,3 +330,22 @@ footer p {
   button:hover{
     background: #faa710;
   }
+#menuSideNav{
+    position : fixed;
+    top: 22%;
+}
+
+  @media (min-width: 576px) {
+    .h-sm-100 {
+        height: 100%;
+    }
+}
+section {
+    border: 1px #ffb010 solid;
+    background-color: #40688d;
+    color: white;
+}
+
+#menuSideNav {
+    z-index: 2000 !important;
+}
