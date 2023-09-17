@@ -19,21 +19,22 @@ $destinations = $manager->filterDoubleDestination($manager->getAllDestination())
             <ul class="nav nav-pills flex-sm-column flex-row flex-nowrap flex-shrink-1 flex-sm-grow-0  mb-sm-auto mb-0 justify-content-center align-items-center align-items-sm-start" id="menu">
                 <li class="nav-item">
                     <a href="index.php" class="nav-link px-sm-0 px-2">
-                        <i class="fa-solid fa-house ms-2 ms-sm-0" style="color: #ffffff;"></i><span class="ms-1 d-none d-sm-inline text-light">Accueil</span>
+                        <i class="fa-solid fa-house ms-3 ms-sm-0" style="color: #ffffff;"></i><span class="ms-1 d-none d-sm-inline text-light">Accueil</span>
                     </a>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="nav-link dropdown-toggle px-sm-0 px-1 text-light" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-headset ms-4 ms-sm-0" style="color: #ffffff;"></i><span class="ms-1 d-none d-sm-inline text-light">Tour Opérateur</span>
+                        <i class="fa-solid fa-headset ms-3 ms-sm-0" style="color: #ffffff;"></i><span class="ms-1 d-none d-sm-inline text-light">Tour Opérateur</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdown">
                         <li><a class="dropdown-item" href="#addTO">Ajouter un TO</a></li>
                         <li><a class="dropdown-item" href="#addDestinationTO">Ajouter une Destination à un TO</a></li>
                         <li><a class="dropdown-item" href="#addCertif">Ajouter premium à un TO</a></li>
                         <li><a class="dropdown-item" href="#modifTO">Modifier un TO</a></li>
+                        <li><a class="dropdown-item" href="#modifDestination">Modifier une destination</a></li>
                     </ul>
                 </li>
-                <li class="dropdown pt-sm-2 pb-sm-4 mt-sm-auto ms-auto ms-sm-0 flex-shrink-1">
+                <li class="dropdown pt-sm-2 pb-sm-4 mt-sm-auto ms-3 ms-sm-0 flex-shrink-1">
                     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-computer" style="color: #ffffff;"></i><span class="d-none d-sm-inline mx-1">Compte</span>
                     </a>
@@ -47,7 +48,7 @@ $destinations = $manager->filterDoubleDestination($manager->getAllDestination())
     </div>
     <div class="text-center col-12"> 
         <h1 class=" text-light pt-5 pb-3"><div class="pt-5"></div>
-        <div class="pt-5"></div>Page d'Administration</h1>
+        <div class="pt-5" id="addTO"></div>Page d'Administration</h1>
     </div>
 </div>
 <!-- Formulaire pour ajouter un tour-opérateur -->
@@ -55,7 +56,7 @@ $destinations = $manager->filterDoubleDestination($manager->getAllDestination())
 
 
 <div class="col-10 offset-1">
-<section class="mt-5 mb-5" id="addTO">
+<section class="mt-5 mb-5" >
     <form action="process/process-add-tour-operator.php" method="POST" class="d-flex flex-column align-items-center mt-5 mb-5">
         <h2>Ajouter un Tour-Opérateur</h2>
         <label for="tour_operator_name">Nom du Tour-Opérateur:</label>
@@ -64,11 +65,11 @@ $destinations = $manager->filterDoubleDestination($manager->getAllDestination())
         <label for="tour_operator_link">Lien vers le site officiel:</label>
         <input type="text" name="tour_operator_link" required class="m-2">
         <br>
-        <button type="submit" class="mt-3">Ajouter Tour-Opérateur</button>
+        <button type="submit" class="mt-3" id="addDestinationTO">Ajouter Tour-Opérateur</button>
     </form>
 </section>
     <!-- Formulaire pour ajouter une destination à un tour-opérateur -->
-<section class="mt-5 mb-5" id="addDestinationTO">
+<section class="mt-5 mb-5">
     <form action="process/process-add-destination.php" method="POST" enctype="multipart/form-data" class="d-flex flex-column align-items-center mt-5 mb-5">
         <h2>Ajouter une Destination à un Tour-Opérateur</h2>
         <label for="destination_location">Location de la Destination:</label>
@@ -91,11 +92,11 @@ $destinations = $manager->filterDoubleDestination($manager->getAllDestination())
         <label for="screenshot" class="form-label">Votre capture d'écran</label>
         <input class="m-2" type="file" class="form-control" id="screenshot" name="screenshot" />
         <br>
-        <button type="submit" class="mt-3">Ajouter Destination</button>
+        <button type="submit" class="mt-3" id="addCertif">Ajouter Destination</button>
     </form>
 </section>
 
-<section class="mt-5 mb-5" id="addCertif">
+<section class="mt-5 mb-5">
     <form action="process/process-get-certificate.php" method="POST" class="d-flex flex-column align-items-center mt-5 mb-5">
         <h2>Ajouter un certificat premium à un Tour-Opérateur</h2>
         <label for="nameSignatory">Nom du signataire du contrat</label>
@@ -113,11 +114,11 @@ $destinations = $manager->filterDoubleDestination($manager->getAllDestination())
         <label>Définir la date de validité</label>
         <input type="date" name="date" id="date"  class="m-2"/>
         <br>
-        <button type="submit" class="mt-3">Envoyer</button>
+        <button type="submit" class="mt-3" id="modifTO">Envoyer</button>
     </form>
 </section>
 
-<section class="mt-5 mb-5" id="modifTO">
+<section class="mt-5 mb-5">
     <form action="process/process-modif-tour-operator.php" method="POST" class="d-flex flex-column align-items-center mt-5 mb-5">
         <h2>Modifier un Tour-Opérateur</h2>
         <select name="tour_operator_id" required class="m-2">
@@ -133,11 +134,11 @@ $destinations = $manager->filterDoubleDestination($manager->getAllDestination())
         <br>
         <label for="link">Lien du site du TO</label>
         <input type="text" name="link" id="link"  class="m-2"/>
-        <button type="submit" class="mt-3">Envoyer</button>
+        <button type="submit" class="mt-3" id="modifDestination">Envoyer</button>
     </form>
 </section>
 
-<section class="mt-5 mb-5" id="modifDestination">
+<section class="mt-5 mb-5">
     <form action="process/process-modif-destination.php" method="POST" class="d-flex flex-column align-items-center mt-5 mb-5">
         <h2>Modifier une destination</h2>
         <select name="destinationId" required class="m-2">
@@ -163,13 +164,5 @@ $destinations = $manager->filterDoubleDestination($manager->getAllDestination())
         </select>
     </form>
 </section>
-
-    <!-- Liens pour d'autres actions d'administration -->
-    <div class="mt-5 pt-5"></div>
-    <h2>Autres Actions d'Administration</h2>
-    <ul>
-        <li><a href="modifier-destination.php">Modifier une Destination</a></li>
-        <!-- Ajoutez d'autres liens vers des pages d'administration ici -->
-    </ul>
 </div>
     <?php include("footer.php"); ?>
