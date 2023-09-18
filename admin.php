@@ -154,7 +154,7 @@ $destinations = $manager->filterDoubleDestination($manager->getAllDestination())
         <label for="destination_price">Prix de la Destination:</label>
         <input type="number" name="destination_price" required class="m-2">
         <label for="picture">Image de la destination</label>
-        <input type="text" name="name" id="picture"  class="m-2"/>
+        <input type="text" name="picture" id="picture"  class="m-2"/>
         <select name="tour_operator_id" required class="m-2">
             <?php
             foreach ($operators as $operator) {
@@ -162,6 +162,7 @@ $destinations = $manager->filterDoubleDestination($manager->getAllDestination())
             }
             ?>
         </select>
+        <button type="submit" class="mt-3">Envoyer</button>
     </form>
 </section>
 </div>
