@@ -7,7 +7,8 @@ if (isset($_POST['name'])){
     $id = $_POST['destinationId'];
     $name = ucfirst($_POST['name']);
     $price = $_POST['destination_price'];
+    $picture = ucfirst($_POST['picture']);
     $idTO = $_POST['tour_operator_id'];
-    $manager->updateDestination($id, $name, $price, $idTO);
+    $manager->updateDestination($id, $name, $price, $picture, $idTO);
 }
 header('Location:../admin.php');

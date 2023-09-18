@@ -236,10 +236,11 @@
             $query->bindValue(':link', $link);
             $query->execute();
         }
-        public function updateDestination($id, $name, $price, $tourOperatorId){
-            $query = $this->bdd->prepare('UPDATE destination SET location = :location, price = :price, tour_operator_id = :tour_operator_id WHERE id = ' . $id);
-            $query->bindValue(':name', $name);
-            $query->bindValue(':link', $link);
+        public function updateDestination($id, $name, $price, $picture, $tourOperatorId){
+            $query = $this->bdd->prepare('UPDATE destination SET location = :location, price = :price, picture = :picture, tour_operator_id = :tour_operator_id WHERE id = ' . $id);
+            $query->bindValue(':location', $name);
+            $query->bindValue(':price', $price);
+            $query->bindValue(':picture', $picture);
             $query->bindValue(':tour_operator_id', $tourOperatorId);
             $query->execute();
         }
