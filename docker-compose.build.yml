@@ -1,0 +1,38 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_voyage
+    restart: always
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    networks:
+      - voyage_network
+    env_file:
+      - .env
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: vekian/voyage:latest
+    container_name: voyage
+    environment:
+      PHP_MEMORY_LIMIT: "512M"
+    ports:
+      - "9040:9000"
+    volumes:
+      - ./public:/var/www/voyage
+    networks:
+      - voyage_network
+    env_file:
+      - .env
+
+volumes:
+  db_data:
+
+networks:
+  voyage_network:
+    name: voyage_network

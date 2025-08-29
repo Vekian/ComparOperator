@@ -1,0 +1,49 @@
+name: Symfony CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Log in to Docker Hub # Using Access Token
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      - name: Create .env file
+        run: |
+          echo 'MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}' >> .env
+          echo 'MYSQL_USER=${{ secrets.MYSQL_USER }}' >> .env
+          echo 'MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}' >> .env
+          echo 'MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}' >> .env
+
+      - name: Build Docker image
+        run: docker compose -f docker-compose.build.yml build
+      - name: Push Docker image to Docker Hub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/voyage:latest
+      - name: Deploy to production server
+        if: success() && github.ref == 'refs/heads/main'
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PROD_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
+          script: |
+            cd /var/www/voyage
+            docker compose down
+            rm docker-compose.yml
+            rm .env
+            echo "${{ secrets.DOCKER_COMPOSE_FILE }}" >> docker-compose.yml
+            echo 'MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}' >> .env
+            echo 'MYSQL_USER=${{ secrets.MYSQL_USER }}' >> .env
+            echo 'MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}' >> .env
+            echo 'MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}' >> .env
+            docker pull ${{ secrets.DOCKER_USERNAME }}/voyage:latest
+            docker compose up -d
+            docker cp voyage:/var/www/html/public ./public

@@ -1,0 +1,33 @@
+services:
+  mariadb:
+    image: mariadb:10.6
+    container_name: mysql_voyage
+    restart: always
+    volumes:
+      - voyage_db_data:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d
+    networks:
+      - voyage_network
+    env_file:
+      - .env
+
+  php:
+    image: vekian/voyage:latest
+    container_name: voyage
+    environment:
+      PHP_MEMORY_LIMIT: "512M"
+    ports:
+      - "9040:9000"
+    volumes:
+      - ./public:/var/www/voyage
+    networks:
+      - voyage_network
+    env_file:
+      - .env
+
+volumes:
+  voyage_db_data:
+
+networks:
+  voyage_network:
+    name: voyage_network

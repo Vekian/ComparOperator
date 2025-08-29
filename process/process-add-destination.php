@@ -17,9 +17,9 @@ if (isset($_FILES['screenshot']) && $_FILES['screenshot']['error'] == 0)
         if (in_array($extension, $allowedExtensions))
         {
             // On peut valider le fichier et le stocker définitivement
-            move_uploaded_file($_FILES['screenshot']['tmp_name'], '../images/' . basename($_FILES['screenshot']['name']));
+            move_uploaded_file($_FILES['screenshot']['tmp_name'], '../public/images/' . basename($_FILES['screenshot']['name']));
                         echo "L'envoi a bien été effectué !";
-            $picture = '../images/' . basename($_FILES['screenshot']['name']);
+            $picture = '../public/images/' . basename($_FILES['screenshot']['name']);
         }
         else
         {

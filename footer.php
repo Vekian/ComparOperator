@@ -1,7 +1,7 @@
 <footer>
     <nav class="footer-light d-flex justify-content-around">
         <div>
-            <a href="index.php"><img src="images/logo2.png" height="150"/></a>
+            <a href="index.php"><img src="public/images/logo2.png" height="150"/></a>
         </div>
         <div class="d-flex flex-column-reverse">
                 <div >

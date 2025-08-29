@@ -1,0 +1,360 @@
+/*
+main : #FB8F00 ECFAFB 81CBC8 4AA6B5
+*/
+/* Styles pour le footer */
+body {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 300px;
+  background-color: #ccf2f5;
+}
+header {
+  z-index: 100;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+header img {
+  transition: transform 1s, filter 1s;
+}
+
+header a {
+  font-family: "League Spartan", sans-serif;
+  font-size: xx-large;
+  color: #faa710 !important;
+  text-decoration: none;
+  padding-right: 30px;
+}
+
+#headerLink:hover {
+  background-color: rgba(159, 159, 163, 0.295);
+  padding: 30px;
+}
+
+header img:hover {
+  filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  transform: scale(1.15);
+}
+
+#destinationSearch {
+  border-radius: 20px 0px 0px 20px;
+}
+
+#imgIndex {
+  background-image: url("../images/accueil.jpg");
+  height: 300px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.navbar {
+  background-color: transparent !important;
+  background: linear-gradient(
+    180deg,
+    #051627 0%,
+    rgba(0, 1, 8, 0.884) 35%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+/*footer*/
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+footer nav {
+  background-color: #335f8a !important;
+}
+
+#copyrightBelow {
+  font-size: 10px;
+}
+
+.container-icone {
+  text-align: center;
+  margin-top: 60px; /* Espacement entre le texte de droits d'auteur et les icônes */
+}
+
+.container-icone i {
+  font-size: 24px; /* Taille des icônes */
+  margin: 0 10px; /* Espacement horizontal entre les icônes */
+  bottom: 20px;
+}
+
+footer p {
+  margin-bottom: 5px; /* Espacement par rapport au bas du footer */
+}
+
+.container-icone p {
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 5px; /* Espacement entre le texte et les icônes */
+}
+
+.container-paiement {
+  text-align: center;
+  margin-top: 60px; /* Espacement entre le texte de droits d'auteur et les icônes */
+}
+
+.container-paiement i {
+  font-size: 24px; /* Taille des icônes */
+  margin: 0 10px; /* Espacement horizontal entre les icônes */
+  bottom: 20px;
+}
+
+.container-paiement p {
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 5px; /* Espacement entre le texte et les icônes */
+}
+/*footer fin*/
+
+#listDestinations .card {
+  height: 250px;
+  background-size: 100% 100% !important;
+  background-position: center;
+  font-weight: 800;
+  color: #106da7;
+  position: relative;
+  border-radius: 15px;
+  border: none !important;
+  transition: background-size 0.3s linear !important;
+  box-shadow: 3px 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  margin-top: 20px;
+}
+
+#listDestinations .card:hover,
+#listDestinations .card:active {
+  background-size: 120% 120% !important;
+}
+#listDestinations .card-user {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+#listDestinations .card-category {
+  position: absolute;
+  top: 50%;
+  font-size: 20px;
+  background-color: #ffffff !important;
+  border-radius: 0px 10px 10px 0px;
+}
+#listDestinations .card-description {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  background-color: #ecd8b2 !important;
+  width: 100%;
+}
+#listDestinations .card p {
+  font-size: 22px;
+}
+#listDestinations .card-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 2;
+  background: rgb(255, 255, 255);
+  opacity: 0;
+}
+#listDestinations .card-link:hover,
+.card-link:active {
+  opacity: 0.1;
+}
+
+#listDestinations .knowMore {
+  color: #faa710;
+}
+
+.modal-content label,
+.modal-content .form-group h4 {
+  color: #faa710;
+}
+
+#align-form {
+  margin-top: 20px;
+}
+.modal-content .form-group p a {
+  color: white;
+}
+
+.modal-content .form-group input,
+.form-group textarea {
+  background-color: #ccf2f5;
+  border: 1px solid #051a30;
+  border-radius: 12px;
+}
+
+.modal-content form {
+  border: 1px solid #030e1a;
+  background-color: #335f8a;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+#destinationMainImg {
+  object-fit: cover;
+  width: 100%;
+  object-position: 50% 80%;
+}
+
+#comments {
+  color: #335f8a;
+
+  background-color: #ecd8b2;
+  border-radius: 0px 4px 4px 4px;
+  box-shadow: 10px 10px 5px #aaaaaa;
+}
+
+#authorComments {
+  border-radius: 4px 4px 0px 0px;
+  box-shadow: 10px 0px 5px #aaaaaa;
+  background-color: #0f2a46 !important;
+  border-bottom: 3px black solid;
+}
+
+#listComments {
+  height: 280px !important;
+  overflow: scroll;
+  font-weight: 600;
+}
+
+#titleComments {
+  background-color: #0f2a46 !important;
+  margin-bottom: 0;
+  box-shadow: 0px 10px 5px #aaaaaa;
+}
+
+#infosTO span {
+  font-weight: 700;
+  font-size: 20px;
+}
+#infosTO p {
+  color: #335f8a;
+  font-weight: 600;
+}
+
+#sectionComments,
+#infosTO {
+  background-color: #ffffff;
+}
+.checked {
+  color: orange;
+}
+
+.rating {
+  border: none;
+}
+
+.rating > label {
+  color: #90a0a3;
+}
+
+.rating > label:before {
+  font-size: 2em;
+  font-family: FontAwesome;
+  content: "\f005";
+  display: inline-block;
+}
+
+.rating > input {
+  display: none;
+}
+
+.rating > input:checked ~ label,
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+  color: #f79426;
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label,
+.rating > input:checked ~ label:hover ~ label {
+  color: #fece31;
+}
+
+button {
+  position: relative;
+  width: 210px;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  outline: none;
+  cursor: pointer;
+  background: #0f2a46;
+  overflow: hidden;
+  transition: 0.6s;
+  font-weight: 700;
+}
+
+button {
+  color: #faa710;
+  border-color: #faa710;
+  z-index: 1;
+}
+button:before,
+button:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  height: 100%;
+  filter: blur(30px);
+  opacity: 0.4;
+  transition: 0.6s;
+}
+button:before {
+  width: 60px;
+  background: rgba(255, 255, 255, 0.6);
+  transform: translateX(-130px) skewX(-45deg);
+}
+button:after {
+  width: 30px;
+  background: rgba(255, 255, 255, 0.6);
+  transform: translateX(-130px) skewX(-45deg);
+}
+button:hover:before,
+button:hover:after {
+  opacity: 0.6;
+  transform: translateX(320px) skewX(-45deg);
+}
+button:hover {
+  color: #40688d;
+  font-weight: 700;
+}
+
+button:hover {
+  background: #faa710;
+}
+#menuSideNav {
+  position: fixed;
+  top: 22%;
+}
+
+@media (min-width: 576px) {
+  .h-sm-100 {
+    height: 100%;
+  }
+}
+section {
+  border: 1px #ffb010 solid;
+  background-color: #40688d;
+  color: white;
+}
+
+#menuSideNav {
+  z-index: 2000 !important;
+}
