@@ -1,3 +1,10 @@
 <?php
-$db = new PDO('mysql:host=127.0.0.1;dbname=comparo_full;charset=utf8', 'root');
-?>
+
+$dbUser = getenv("MYSQL_USER");
+$dbPass = getenv("MYSQL_PASSWORD");
+$dbName = getenv("MYSQL_DATABASE");
+try {
+    $baseSpotisma = new PDO("mysql:host=mysql_voyage;dbname=$dbName;charset=utf8", $dbUser, $dbPass);
+} catch (Exception $e) {
+    die('Erreur : ' .$e->getMessage());
+}
