@@ -81,7 +81,7 @@ CREATE TABLE
     `location` varchar(255) NOT NULL,
     `price` int (11) NOT NULL,
     `tour_operator_id` int (11) NOT NULL,
-    `picture` varchar(255) NOT NULL,
+    `picture` varchar(255) NOT NULL
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb3 COLLATE = utf8mb3_general_ci;
 
 --
