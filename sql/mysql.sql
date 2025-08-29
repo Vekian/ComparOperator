@@ -80,19 +80,32 @@ CREATE TABLE
     `id` int (11) NOT NULL,
     `location` varchar(255) NOT NULL,
     `price` int (11) NOT NULL,
-    `tour_operator_id` int (11) NOT NULL
+    `tour_operator_id` int (11) NOT NULL,
+    `picture` varchar(255) NOT NULL,
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb3 COLLATE = utf8mb3_general_ci;
 
 --
 -- Dumping data for table `destination`
 --
 INSERT INTO
-  `destination` (`id`, `location`, `price`, `tour_operator_id`)
+  `destination` (
+    `id`,
+    `location`,
+    `price`,
+    `tour_operator_id`,
+    `picture`
+  )
 VALUES
-  (1, 'Rome', 1650, 2),
-  (2, 'Londres', 1100, 2),
-  (3, 'Monaco', 1390, 1),
-  (4, 'Tunis', 2390, 3);
+  (1, 'Rome', 1650, 2, 'public/images/rome.webp'),
+  (
+    2,
+    'Londres',
+    1100,
+    2,
+    'public/images/londres.jpg'
+  ),
+  (3, 'Monaco', 1390, 1, 'public/images/monaco.jpg'),
+  (4, 'Tunis', 2390, 3, 'public/images/tunis.jpg');
 
 -- --------------------------------------------------------
 --
