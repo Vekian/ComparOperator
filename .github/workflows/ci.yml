@@ -46,4 +46,4 @@ jobs:
             echo 'MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}' >> .env
             docker pull ${{ secrets.DOCKER_USERNAME }}/voyage:latest
             docker compose up -d
-            docker cp voyage:/var/www/html/public ./public
+            docker cp voyage:/var/www/html/public ./
